@@ -59,7 +59,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String baseUrl =
-      'https://github.com/ketanvishwakarma/flutter_widgets_by_kdevigner/blob/master/lib/';
+      'https://github.com/ketanvishwakarma/flutter_widgets_by_kdevigner/blob/master/lib/widget_';
 
   List _listOfWidgets = ['Link', 'main'];
 
