@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
+
+import 'widget_link.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,9 +13,36 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Widgets | KDevigner',
       debugShowCheckedModeBanner: false,
+
+      /* light theme settings */
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.blue,
+        primaryColor: Colors.white,
+        brightness: Brightness.light,
+        accentColor: Colors.black,
+        accentIconTheme: IconThemeData(color: Colors.white),
+        dividerColor: Colors.white54,
+        scaffoldBackgroundColor: Colors.white,
+
       ),
+
+      /* Dark theme settings */
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blue,
+        primaryColor: Colors.black,
+        brightness: Brightness.dark,
+        accentColor: Colors.white,
+        accentIconTheme: IconThemeData(color: Colors.black),
+        dividerColor: Colors.black12,
+        scaffoldBackgroundColor: Color(0xFF131313),
+
+      ),
+
+      /* ThemeMode.system to follow system theme,
+         ThemeMode.light for light theme,
+         ThemeMode.dark for dark theme */
+      themeMode: ThemeMode.system,
+
       home: MyHomePage(title: 'Flutter Widgets | KDevigner'),
     );
   }
@@ -30,47 +58,73 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List _listOfWidgets = [
-    'SafeArea',
-    'Expanded',
-    'SafeArea',
-    'Expanded',
-    'SafeArea',
-    'Expanded',
-    'SafeArea',
-    'Expanded',
-    'SafeArea',
-    'Expanded',
-  ];
+  String baseUrl =
+      'https://github.com/ketanvishwakarma/flutter_widgets_by_kdevigner/blob/master/lib/';
+
+  List _listOfWidgets = ['Link', 'main'];
+
+  void _showWidget(String name) {
+    if (name == 'Link')
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WidgetLink(),
+          ));
+  }
 
   @override
   Widget build(BuildContext context) {
+    //var themeData = Theme.of(context).copyWith(scaffoldBackgroundColor: Colors.black87);
     return Scaffold(
+        appBar: AppBar(
+          title: Center(child: Text('List of Widgets')),
+        ),
         body: SafeArea(
-            child: Container(
-                padding: EdgeInsets.all(20),
+            child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.all(20),
+              child: Text(
+                'oneTap for example\nlongPress for code',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+            Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.only(top: 10, left: 10),
                 child: SingleChildScrollView(
                   child: Wrap(
                     direction: Axis.horizontal,
                     children: _listOfWidgets
                         .map(
                           (e) => Container(
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.only(left: 10),
                             child: Link(
-                              target: LinkTarget.blank,
-                              uri: Uri.parse(
-                                  'https://img.youtube.com/vi/lkF0TQJO0bA/maxresdefault.jpg'),
+                              target: LinkTarget.self,
+                              uri: Uri.parse(baseUrl +
+                                  e.toString().toLowerCase() +
+                                  '.dart'),
                               builder: (BuildContext context,
                                   Future<void> Function() followLink) {
                                 return ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      padding: EdgeInsets.all(20), elevation: 10),
-                                  onLongPress: () {},
-                                  onPressed: () {
-                                    followLink();
-                                  },
-                                  child: Text(e,style: TextStyle(fontSize: 20),)
-                                );
+                                    style: ElevatedButton.styleFrom(
+                                        padding: EdgeInsets.all(10),
+                                        elevation: 10),
+                                    onLongPress: () {
+                                      followLink();
+                                    },
+                                    onPressed: () {
+                                      setState(() {
+
+                                      });
+                                      _showWidget(e);
+                                    },
+                                    child: Text(
+                                      e,
+                                      style: TextStyle(fontSize: 20),
+                                    ));
                               },
                             ),
                           ),
@@ -78,6 +132,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         .toList()
                         .cast<Widget>(),
                   ),
-                ))));
+                )),
+          ],
+        )));
   }
 }
