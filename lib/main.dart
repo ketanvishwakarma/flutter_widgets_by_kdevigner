@@ -48,6 +48,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+String baseUrl = 'https://github.com/ketanvishwakarma/flutter_widgets_by_kdevigner/blob/main/lib/widget_';
+
+List _listOfWidgets = ['Link'];
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -58,10 +63,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String baseUrl =
-      'https://github.com/ketanvishwakarma/flutter_widgets_by_kdevigner/blob/master/lib/widget_';
-
-  List _listOfWidgets = ['Link', 'main'];
 
   void _showWidget(String name) {
     if (name == 'Link')
@@ -74,7 +75,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //var themeData = Theme.of(context).copyWith(scaffoldBackgroundColor: Colors.black87);
     return Scaffold(
         appBar: AppBar(
           title: Center(child: Text('List of Widgets')),
@@ -102,10 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           (e) => Container(
                             padding: EdgeInsets.only(left: 10),
                             child: Link(
-                              target: LinkTarget.self,
-                              uri: Uri.parse(baseUrl +
-                                  e.toString().toLowerCase() +
-                                  '.dart'),
+                              target: LinkTarget.blank,
+                              uri: Uri.parse('https://www.youtube.com/watch?v=ujlqRTJg48g'),
                               builder: (BuildContext context,
                                   Future<void> Function() followLink) {
                                 return ElevatedButton(
@@ -116,9 +114,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                       followLink();
                                     },
                                     onPressed: () {
-                                      setState(() {
-
-                                      });
                                       _showWidget(e);
                                     },
                                     child: Text(
