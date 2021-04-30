@@ -16,6 +16,8 @@ class _WidgetLinkState extends State<WidgetLink> {
         body: Container(
           padding: EdgeInsets.all(20),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Link(
                 uri: Uri.parse('https://twitter.com/KDevigner/'),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 
@@ -8,14 +9,25 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Widgets | KDevigner',
       debugShowCheckedModeBanner: false,
-
       /* light theme settings */
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          elevation: 20,
+          shadowColor: Colors.black26,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(150, 70),
+            padding: EdgeInsets.all(10),
+            elevation: 0,
+          ),
+        ),
         primarySwatch: Colors.blue,
         primaryColor: Colors.white,
         brightness: Brightness.light,
@@ -23,33 +35,41 @@ class MyApp extends StatelessWidget {
         accentIconTheme: IconThemeData(color: Colors.white),
         dividerColor: Colors.white54,
         scaffoldBackgroundColor: Colors.white,
-
       ),
 
       /* Dark theme settings */
       darkTheme: ThemeData(
+        appBarTheme: AppBarTheme(
+          elevation: 20,
+          shadowColor: Colors.lightBlueAccent,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              minimumSize: Size(150, 70),
+              padding: EdgeInsets.all(10),
+              elevation: 0,
+          ),
+        ),
         primarySwatch: Colors.blue,
         primaryColor: Colors.black,
         brightness: Brightness.dark,
         accentColor: Colors.white,
         accentIconTheme: IconThemeData(color: Colors.black),
         dividerColor: Colors.black12,
-        scaffoldBackgroundColor: Color(0xFF131313),
-
+        scaffoldBackgroundColor: Colors.black,
       ),
 
       /* ThemeMode.system to follow system theme,
          ThemeMode.light for light theme,
          ThemeMode.dark for dark theme */
       themeMode: ThemeMode.system,
-
       home: MyHomePage(title: 'Flutter Widgets | KDevigner'),
     );
   }
 }
 
-
-String baseUrl = 'https://github.com/ketanvishwakarma/flutter_widgets_by_kdevigner/blob/main/lib/widget_';
+String baseUrl =
+    'https://github.com/ketanvishwakarma/flutter_widgets_by_kdevigner/blob/main/lib/widget_';
 
 List _listOfWidgets = ['Link'];
 
@@ -63,7 +83,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   void _showWidget(String name) {
     if (name == 'Link')
       Navigator.push(
@@ -77,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('List of Widgets')),
+          title: Text('List of Widgets'),
         ),
         body: SafeArea(
             child: Column(
@@ -100,16 +119,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: _listOfWidgets
                         .map(
                           (e) => Container(
-                            padding: EdgeInsets.only(left: 10),
                             child: Link(
                               target: LinkTarget.blank,
-                              uri: Uri.parse('https://www.youtube.com/watch?v=ujlqRTJg48g'),
+                              uri: Uri.parse(
+                                  'https://www.youtube.com/watch?v=ujlqRTJg48g'),
                               builder: (BuildContext context,
                                   Future<void> Function() followLink) {
                                 return ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        padding: EdgeInsets.all(10),
-                                        elevation: 10),
                                     onLongPress: () {
                                       followLink();
                                     },
