@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets_by_kdevigner/widget_animation_container.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_fade_transition.dart';
 
 import 'widget_link.dart';
@@ -73,7 +74,7 @@ class MyApp extends StatelessWidget {
 String baseUrl =
     'https://github.com/ketanvishwakarma/flutter_widgets_by_kdevigner/blob/main/lib/widget_';
 
-List _listOfWidgets = ['Link', 'FadeTransition'];
+List _listOfWidgets = ['Link', 'FadeTransition', 'AnimatedContainer'];
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -97,6 +98,12 @@ class _MyHomePageState extends State<MyHomePage> {
           context,
           MaterialPageRoute(
             builder: (context) => WidgetFadeTransition(),
+          ));
+    if (name == 'AnimatedContainer')
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WidgetAnimatedContainer(),
           ));
   }
 
