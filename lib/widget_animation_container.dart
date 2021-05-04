@@ -35,7 +35,7 @@ class _WidgetAnimatedContainerState extends State<WidgetAnimatedContainer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("FadeTransition Widget")),
+        appBar: AppBar(title: Text("AnimatedContainer Widget")),
         body: Center(
           child: Container(
             padding: EdgeInsets.all(20),
@@ -65,7 +65,7 @@ class _WidgetAnimatedContainerState extends State<WidgetAnimatedContainer> {
         ),
         floatingActionButton: Link(
             target: LinkTarget.self,
-            uri: Uri.parse(baseUrl + 'fade_transition.dart'),
+            uri: Uri.parse(baseUrl + 'animation_container.dart'),
             builder: (context, followLink) {
               return FloatingActionButton(
                   onPressed: () {
