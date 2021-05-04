@@ -1,6 +1,16 @@
+/*
+* Uses a package url_launcher
+* Used to open a url in the app itself or it's native app
+*   ex: web page -> chrome, yt video -> yt app
+*
+* Link widget :
+*   uri : where url will be specified ,
+*   target : LinkTarget.{something} to specify where to open,
+*   builder : which defines it's body ex: button or text etc..
+* */
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
-
 import 'main.dart';
 
 class WidgetLink extends StatefulWidget {

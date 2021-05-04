@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
+import 'package:flutter_widgets_by_kdevigner/widget_fade_transition.dart';
 
 import 'widget_link.dart';
 
@@ -9,7 +9,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
       /* light theme settings */
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          elevation: 20,
+          elevation: 5,
           shadowColor: Colors.black26,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -26,6 +25,8 @@ class MyApp extends StatelessWidget {
             minimumSize: Size(150, 70),
             padding: EdgeInsets.all(10),
             elevation: 0,
+            
+            animationDuration: Duration(seconds: 10)
           ),
         ),
         primarySwatch: Colors.blue,
@@ -40,14 +41,15 @@ class MyApp extends StatelessWidget {
       /* Dark theme settings */
       darkTheme: ThemeData(
         appBarTheme: AppBarTheme(
-          elevation: 20,
-          shadowColor: Colors.lightBlueAccent,
+          elevation: 5,
+          shadowColor: Colors.white,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-              minimumSize: Size(150, 70),
-              padding: EdgeInsets.all(10),
-              elevation: 0,
+            minimumSize: Size(150, 70),
+            padding: EdgeInsets.all(10),
+            elevation: 0,
+            animationDuration: Duration(seconds: 10)
           ),
         ),
         primarySwatch: Colors.blue,
@@ -71,7 +73,7 @@ class MyApp extends StatelessWidget {
 String baseUrl =
     'https://github.com/ketanvishwakarma/flutter_widgets_by_kdevigner/blob/main/lib/widget_';
 
-List _listOfWidgets = ['Link'];
+List _listOfWidgets = ['Link', 'FadeTransition'];
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -89,6 +91,12 @@ class _MyHomePageState extends State<MyHomePage> {
           context,
           MaterialPageRoute(
             builder: (context) => WidgetLink(),
+          ));
+    if (name == 'FadeTransition')
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WidgetFadeTransition(),
           ));
   }
 
@@ -119,24 +127,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: _listOfWidgets
                         .map(
                           (e) => Container(
-                            child: Link(
-                              target: LinkTarget.blank,
-                              uri: Uri.parse(
-                                  'https://www.youtube.com/watch?v=ujlqRTJg48g'),
-                              builder: (BuildContext context,
-                                  Future<void> Function() followLink) {
-                                return ElevatedButton(
-                                    onLongPress: () {
-                                      followLink();
-                                    },
-                                    onPressed: () {
-                                      _showWidget(e);
-                                    },
-                                    child: Text(
-                                      e,
-                                      style: TextStyle(fontSize: 20),
-                                    ));
+                            padding: EdgeInsets.all(10),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _showWidget(e);
                               },
+                              child: Text(
+                                e,
+                                style: TextStyle(fontSize: 20),
+                              ),
                             ),
                           ),
                         )
