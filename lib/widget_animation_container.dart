@@ -1,14 +1,9 @@
 /*
-* Used to make simple opacity transition animation
-* require :
-*     class defined with SingleTickerProviderStateMixin
-*     opacity : it's define visibility of the widget so it's should be in the changing mode so it will going to change opacity from 0 to high.
-*             we ues curved animation and it's parent uses animation controller;
-*             now animation controller uses SingleTickerProviderStateMixin for it's attribute 'vsync' : we set to 'this',
-*                   and duration.
-*             animation controller should be define in the variable because it's must be set  _controller.forward(); when app is running.
+* Used to make animated color, size, border etc...
 *
-*     child: the widget we going to use
+* require :
+*     just duration
+*     and curve : to specify the animation
 *
 */
 
