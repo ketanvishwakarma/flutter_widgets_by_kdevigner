@@ -44,37 +44,39 @@ class _WidgetFadeTransitionState extends State<WidgetFadeTransition>
     _controller.forward();
     return Scaffold(
         appBar: AppBar(title: Text("FadeTransition Widget")),
-        body: Container(
-          padding: EdgeInsets.all(20),
-          child: Wrap(
-            spacing: 20,
-            children: [
-              FadeTransition(
-                opacity:
-                    CurvedAnimation(parent: _controller, curve: Curves.easeInExpo),
-                child: Text('Curves.easeInExpo',),
-              ),
-              FadeTransition(
-                opacity: CurvedAnimation(
-                    parent: _controller, curve: Curves.easeIn),
-                child: Text('Curves.easeIn'),
-              ),
-              FadeTransition(
-                opacity:
-                CurvedAnimation(parent: _controller, curve: Curves.linear),
-                child: Text('Curves.linear'),
-              ),
-              FadeTransition(
-                opacity: CurvedAnimation(
-                    parent: _controller, curve: Curves.easeInCirc),
-                child: Text('Curves.easeInCirc'),
-              ),
-              FadeTransition(
-                opacity: CurvedAnimation(
-                    parent: _controller, curve: Curves.easeInCirc),
-                child: Text('Curves.easeInCirc'),
-              ),
-            ],
+        body: Center(
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: Wrap(
+              spacing: 20,
+              children: [
+                FadeTransition(
+                  opacity:
+                      CurvedAnimation(parent: _controller, curve: Curves.easeInExpo),
+                  child: Text('Curves.easeInExpo',),
+                ),
+                FadeTransition(
+                  opacity: CurvedAnimation(
+                      parent: _controller, curve: Curves.easeIn),
+                  child: Text('Curves.easeIn'),
+                ),
+                FadeTransition(
+                  opacity:
+                  CurvedAnimation(parent: _controller, curve: Curves.linear),
+                  child: Text('Curves.linear'),
+                ),
+                FadeTransition(
+                  opacity: CurvedAnimation(
+                      parent: _controller, curve: Curves.easeInCirc),
+                  child: Text('Curves.easeInCirc'),
+                ),
+                FadeTransition(
+                  opacity: CurvedAnimation(
+                      parent: _controller, curve: Curves.easeInCirc),
+                  child: Text('Curves.easeInCirc'),
+                ),
+              ],
+            ),
           ),
         ),
         floatingActionButton: Link(
