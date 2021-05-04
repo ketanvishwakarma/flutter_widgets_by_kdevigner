@@ -48,7 +48,7 @@ class _WidgetAnimatedContainerState extends State<WidgetAnimatedContainer> {
                   onPressed: () {
                     setState(() {
                       Random random = new Random();
-                      size = random.nextInt(500) as double;
+                      size = random.nextInt(500).toDouble();
                       _fontSize = random.nextInt(50).toDouble();
                       _color = Color.fromRGBO(random.nextInt(256), random.nextInt(256), random.nextInt(256), 1);
                       _borderRadiusGeometry = BorderRadius.circular(random.nextInt(50).toDouble());

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_animation_container.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_fade_transition.dart';
+import 'package:flutter_widgets_by_kdevigner/widget_opacity.dart';
 
 import 'widget_link.dart';
 
@@ -24,12 +25,10 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            minimumSize: Size(150, 70),
-            padding: EdgeInsets.all(10),
-            elevation: 0,
-            
-            animationDuration: Duration(seconds: 10)
-          ),
+              minimumSize: Size(150, 70),
+              padding: EdgeInsets.all(10),
+              elevation: 0,
+              animationDuration: Duration(seconds: 10)),
         ),
         primarySwatch: Colors.blue,
         primaryColor: Colors.white,
@@ -48,11 +47,10 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            minimumSize: Size(150, 70),
-            padding: EdgeInsets.all(10),
-            elevation: 0,
-            animationDuration: Duration(seconds: 10)
-          ),
+              minimumSize: Size(150, 70),
+              padding: EdgeInsets.all(10),
+              elevation: 0,
+              animationDuration: Duration(seconds: 10)),
         ),
         primarySwatch: Colors.blue,
         primaryColor: Colors.black,
@@ -75,7 +73,12 @@ class MyApp extends StatelessWidget {
 String baseUrl =
     'https://github.com/ketanvishwakarma/flutter_widgets_by_kdevigner/blob/main/lib/widget_';
 
-List _listOfWidgets = ['Link', 'FadeTransition', 'AnimatedContainer'];
+List _listOfWidgets = [
+  'Link',
+  'FadeTransition',
+  'AnimatedContainer',
+  'Opacity'
+];
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -106,6 +109,12 @@ class _MyHomePageState extends State<MyHomePage> {
           MaterialPageRoute(
             builder: (context) => WidgetAnimatedContainer(),
           ));
+    if (name == 'Opacity')
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WidgetOpacity(),
+          ));
   }
 
   @override
@@ -117,15 +126,6 @@ class _MyHomePageState extends State<MyHomePage> {
         body: SafeArea(
             child: Column(
           children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(20),
-              child: Text(
-                'oneTap for example\nlongPress for code',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
             Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.only(top: 10, left: 10),
