@@ -7,7 +7,6 @@
 *
 */
 
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -22,15 +21,31 @@ class WidgetAnimatedContainer extends StatefulWidget {
 }
 
 class _WidgetAnimatedContainerState extends State<WidgetAnimatedContainer> {
-
   Color _color = Colors.white;
-  double size = 100, _fontSize;
+  double size = 100;
   BorderRadiusGeometry _borderRadiusGeometry = BorderRadius.circular(8);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("AnimatedContainer Widget")),
+        appBar: AppBar(
+          title: Text("AnimatedContainer Widget"),
+          actions: [
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  Random random = new Random();
+                  size = random.nextInt(500).toDouble();
+                  _color = Color.fromRGBO(random.nextInt(256),
+                      random.nextInt(256), random.nextInt(256), 1);
+                  _borderRadiusGeometry =
+                      BorderRadius.circular(random.nextInt(50).toDouble());
+                });
+              },
+              icon: Icon(Icons.touch_app),
+            )
+          ],
+        ),
         body: Center(
           child: Container(
             padding: EdgeInsets.all(20),
@@ -41,20 +56,9 @@ class _WidgetAnimatedContainerState extends State<WidgetAnimatedContainer> {
                 duration: Duration(seconds: 2),
                 width: size,
                 height: size,
-                decoration: BoxDecoration(color: _color,borderRadius: _borderRadiusGeometry),
+                decoration: BoxDecoration(
+                    color: _color, borderRadius: _borderRadiusGeometry),
               ),
-              Text('Changing Text Size Also!!',style: TextStyle(fontSize: _fontSize),),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      Random random = new Random();
-                      size = random.nextInt(500).toDouble();
-                      _fontSize = random.nextInt(50).toDouble();
-                      _color = Color.fromRGBO(random.nextInt(256), random.nextInt(256), random.nextInt(256), 1);
-                      _borderRadiusGeometry = BorderRadius.circular(random.nextInt(50).toDouble());
-                    });
-                  },
-                  child: Text('Change'))
             ]),
           ),
         ),

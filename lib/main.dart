@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_animation_container.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_fade_transition.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_opacity.dart';
+import 'package:flutter_widgets_by_kdevigner/widget_page_view.dart';
+import 'package:flutter_widgets_by_kdevigner/widget_table.dart';
 
 import 'widget_link.dart';
 
@@ -11,7 +13,32 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+bool darkTheme = false;
+
+_MyAppState _myTheme = _MyAppState();
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with ChangeNotifier {
+  ThemeMode currentTheme() {
+    return darkTheme ? ThemeMode.dark : ThemeMode.light;
+  }
+  void switchTheme() {
+    darkTheme = !darkTheme;
+    notifyListeners();
+  }
+
+  @override
+  void initState() {
+    _myTheme.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -64,7 +91,7 @@ class MyApp extends StatelessWidget {
       /* ThemeMode.system to follow system theme,
          ThemeMode.light for light theme,
          ThemeMode.dark for dark theme */
-      themeMode: ThemeMode.system,
+      themeMode: _myTheme.currentTheme(),
       home: MyHomePage(title: 'Flutter Widgets | KDevigner'),
     );
   }
@@ -77,14 +104,14 @@ List _listOfWidgets = [
   'Link',
   'FadeTransition',
   'AnimatedContainer',
-  'Opacity'
+  'Opacity',
+  'PageView',
+  'Table'
 ];
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
   final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -115,13 +142,41 @@ class _MyHomePageState extends State<MyHomePage> {
           MaterialPageRoute(
             builder: (context) => WidgetOpacity(),
           ));
+    if (name == 'PageView')
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WidgetPageView(),
+          ));
+    if (name == 'Table')
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WidgetTable(),
+          ));
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: darkTheme ? Colors.black : Colors.white,
+        statusBarBrightness: darkTheme ? Brightness.dark : Brightness.light));
     return Scaffold(
         appBar: AppBar(
           title: Text('List of Widgets'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.lightbulb),
+              onPressed: () {
+                setState(() {
+                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                      statusBarColor: Theme.of(context).accentColor,
+                      statusBarBrightness: Theme.of(context).brightness));
+                  _myTheme.switchTheme();
+                });
+              },
+            )
+          ],
         ),
         body: SafeArea(
             child: Column(
