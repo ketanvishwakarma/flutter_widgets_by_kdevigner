@@ -5,6 +5,7 @@ import 'package:flutter_widgets_by_kdevigner/widget_animation_container.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_fade_transition.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_opacity.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_page_view.dart';
+import 'package:flutter_widgets_by_kdevigner/widget_sliver_appbar.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_table.dart';
 
 import 'widget_link.dart';
@@ -26,6 +27,7 @@ class _MyAppState extends State<MyApp> with ChangeNotifier {
   ThemeMode currentTheme() {
     return darkTheme ? ThemeMode.dark : ThemeMode.light;
   }
+
   void switchTheme() {
     darkTheme = !darkTheme;
     notifyListeners();
@@ -106,12 +108,14 @@ List _listOfWidgets = [
   'AnimatedContainer',
   'Opacity',
   'PageView',
-  'Table'
+  'Table',
+  'SliverAppBar'
 ];
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -154,13 +158,19 @@ class _MyHomePageState extends State<MyHomePage> {
           MaterialPageRoute(
             builder: (context) => WidgetTable(),
           ));
+    if (name == 'SliverAppBar')
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WidgetSliverAppBar(),
+          ));
   }
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: darkTheme ? Colors.black : Colors.white,
-        statusBarBrightness: darkTheme ? Brightness.dark : Brightness.light));
+        statusBarIconBrightness: darkTheme ? Brightness.dark : Brightness.light,
+        statusBarColor: darkTheme ? Colors.black : Colors.white));
     return Scaffold(
         appBar: AppBar(
           title: Text('List of Widgets'),
@@ -169,10 +179,10 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.lightbulb),
               onPressed: () {
                 setState(() {
-                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                      statusBarColor: Theme.of(context).accentColor,
-                      statusBarBrightness: Theme.of(context).brightness));
                   _myTheme.switchTheme();
+                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                      statusBarIconBrightness: darkTheme ? Brightness.dark : Brightness.light,
+                      statusBarColor: darkTheme ? Colors.black : Colors.white));
                 });
               },
             )
