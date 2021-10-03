@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_animation_container.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_fade_transition.dart';
+import 'package:flutter_widgets_by_kdevigner/widget_listview.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_opacity.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_page_view.dart';
 import 'package:flutter_widgets_by_kdevigner/widget_sliver_appbar.dart';
@@ -109,7 +110,8 @@ List _listOfWidgets = [
   'Opacity',
   'PageView',
   'Table',
-  'SliverAppBar'
+  'SliverAppBar',
+  'Listview Builder',
 ];
 
 class MyHomePage extends StatefulWidget {
@@ -164,6 +166,12 @@ class _MyHomePageState extends State<MyHomePage> {
           MaterialPageRoute(
             builder: (context) => WidgetSliverAppBar(),
           ));
+    if (name == 'Listview Builder')
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WidgetListViewBuilder(),
+          ));
   }
 
   @override
@@ -181,7 +189,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {
                   _myTheme.switchTheme();
                   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                      statusBarIconBrightness: darkTheme ? Brightness.dark : Brightness.light,
+                      statusBarIconBrightness:
+                          darkTheme ? Brightness.dark : Brightness.light,
                       statusBarColor: darkTheme ? Colors.black : Colors.white));
                 });
               },
